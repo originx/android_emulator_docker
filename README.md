@@ -16,6 +16,6 @@ This wil build and run the Dockerfile which contains basic setup of Ubuntu 16.04
 Startup.sh script will create, bootup and wait for the emulator to finish booting.
 
 
-####TODO
+#### TODO
 -disable animations on emulator for testing
 -enable passing emulator image and arch during docker Startup
