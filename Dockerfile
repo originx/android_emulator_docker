@@ -8,6 +8,8 @@ FROM phusion/baseimage:0.10.0
 
 # Expose ADB
 EXPOSE 5554
+EXPOSE 5555
+EXPOSE 5900
 
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
