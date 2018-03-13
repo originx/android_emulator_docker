@@ -1,13 +1,17 @@
-MAINTAINER morsolic <marioorsolic@gmail.com>
-LABEL Version="0.0.1"
 # Description="Android SDK and emulator environment"
 # Uses phusion/baseimage as base image.
 # See https://github.com/phusion/baseimage-docker/blob/master/Changelog.md for
 # a list of version numbers.
 FROM phusion/baseimage:0.10.0
 
+MAINTAINER morsolic <marioorsolic@gmail.com>
+
+LABEL Version="0.0.1"
+
 # Expose ADB
 EXPOSE 5554
+EXPOSE 5555
+EXPOSE 5900
 
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
