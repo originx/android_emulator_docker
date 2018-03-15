@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Detect ip and forward ADB ports outside to outside interface
 ip=$(ifconfig  | grep 'inet addr:'| grep -v '127.0.0.1' | cut -d: -f2 | awk '{ print $1}')
 socat tcp-listen:5554,bind=$ip,fork tcp:127.0.0.1:5554 &
@@ -9,7 +9,7 @@ socat tcp-listen:5555,bind=$ip,fork tcp:127.0.0.1:5555 &
 echo $EMULATOR_IMAGE
 echo $ARCH
 echo "no" | avdmanager create avd -f -n emulator_avd --package $EMULATOR_IMAGE --abi $ARCH
-echo "no" | emulator -avd emulator_avd -noaudio -no-window -gpu auto -verbose
+echo "no" | emulator -avd emulator_avd -no-audio -no-boot-anim -no-window -gpu auto -verbose
 
 set +e
 

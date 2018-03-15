@@ -1,10 +1,11 @@
-MAINTAINER morsolic <marioorsolic@gmail.com>
-LABEL Version="0.0.1"
+
 # Description="Android SDK and emulator environment"
 # Uses phusion/baseimage as base image.
 # See https://github.com/phusion/baseimage-docker/blob/master/Changelog.md for
 # a list of version numbers.
 FROM phusion/baseimage:0.10.0
+MAINTAINER morsolic <marioorsolic@gmail.com>
+LABEL Version="0.0.1"
 
 # Expose ADB
 EXPOSE 5554
@@ -37,8 +38,7 @@ RUN yes | sdkmanager --update --verbose
 RUN yes | sdkmanager "platform-tools" --verbose
 RUN yes | sdkmanager "platforms;android-27" --verbose
 RUN yes | sdkmanager "build-tools;27.0.3" --verbose
-RUN yes | sdkmanager "system-images;android-27;google_apis;x86" --verbose
-RUN yes | sdkmanager "system-images;android-25;google_apis;armeabi-v7a" --verbose
+RUN yes | sdkmanager "system-images;android-23;google_apis;armeabi-v7a" --verbose
 RUN yes | sdkmanager "extras;android;m2repository" --verbose
 RUN yes | sdkmanager "extras;google;m2repository" --verbose
 
@@ -47,7 +47,7 @@ ENV PATH $PATH:$ANDROID_HOME/platform-tools
 ENV PATH $PATH:$ANDROID_HOME/emulator
 
 #Install latest android emulator   system images
-ENV EMULATOR_IMAGE "system-images;android-25;google_apis;armeabi-v7a"
+ENV EMULATOR_IMAGE "system-images;android-23;google_apis;armeabi-v7a"
 ENV ARCH "armeabi-v7a"
 RUN yes | sdkmanager $EMULATOR_IMAGE --verbose
 
