@@ -1,4 +1,18 @@
-#!/bin/bash
+#!/usr/bin/env sh
+
+if [ -z "$EMULATOR_IMAGE" ]; then
+   echo "variable \033[31m\$EMULATOR_IMAGE \033[0mis not set"
+fi
+
+if [ -z "$ARCH" ]; then
+   echo "variable \033[31m\$ARCH \033[0mis not set"
+fi
+
+if [ -z "$EMULATOR_IMAGE" ] || [ -z "$ARCH" ]; then
+   echo ""
+   exit
+fi
+
 # Detect ip and forward ADB ports outside to outside interface
 ip=$(ifconfig  | grep 'inet addr:'| grep -v '127.0.0.1' | cut -d: -f2 | awk '{ print $1}')
 socat tcp-listen:5554,bind=$ip,fork tcp:127.0.0.1:5554 &
@@ -6,8 +20,10 @@ socat tcp-listen:5555,bind=$ip,fork tcp:127.0.0.1:5555 &
 
 #emulator image and arch is defined in the dockerfile as environment variables.
 #possible to make this configurable later on with config file or per CLI args
-echo $EMULATOR_IMAGE
-echo $ARCH
+echo Emulator image: $EMULATOR_IMAGE
+echo Architecture: $ARCH
+
+echo create AVD 
 echo "no" | avdmanager create avd -f -n emulator_avd --package $EMULATOR_IMAGE --abi $ARCH
 echo "no" | emulator -avd emulator_avd -noaudio -no-window -gpu auto -verbose
 
