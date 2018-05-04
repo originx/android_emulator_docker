@@ -1,6 +1,6 @@
 version: "3.6"
 services:
   android_emulator:
-    build: /
+    build: .
     ports:
       - "5554:5554"
