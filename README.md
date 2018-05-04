@@ -7,15 +7,16 @@ Initial repo where android emulator with the sdk can be started to run instrumen
 Intended use would be to make a stable image that can be used in CI
 
 ## Usage
-If you want to run the emulator you can use docker-compose or manually build the docker image:
+If you want to run the emulator you can use docker-compose 
 ```
 docker-compose up
 ```
+or manually build the docker image:
+```
+docker build -t android_tag_emulator . --build-arg HTTP_PROXY=http://muc-web-01.server.com:8080 --build-arg HTTPS_PROXY=https://muc-web-01.server.com:8080
+docker run -d -it -p 5554:5554 --name=AndroidEmulator android_tag_emulator
+```
+btw ```server.com``` is a synonym
 
-This wil build and run the Dockerfile which contains basic setup of Ubuntu 16.04 LTS with 27 arm emulator.
+This will build (and run) the Dockerfile which contains basic setup of Ubuntu 16.04 LTS with 27 arm emulator.
 Startup.sh script will create, bootup and wait for the emulator to finish booting.
-
-
-#### TODO
--disable animations on emulator for testing
--enable passing emulator image and arch during docker Startup
