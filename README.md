@@ -13,7 +13,7 @@ docker-compose up
 ```
 or manually build the docker image:
 ```
-docker build -t android_tag_emulator .
+docker build -t android_tag_emulator . --build-arg APROXY_PROTOCOL=http --build-arg APROXY_SERVER=muc-web-01.loyaltypartner.com --build-arg APROXY_PORT=8080
 docker run -d -it -p 5554:5554 --name=AndroidEmulator android_tag_emulator
 ```
 btw ```server.com``` is a synonym
