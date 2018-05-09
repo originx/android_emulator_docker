@@ -7,7 +7,7 @@ FROM phusion/baseimage:0.10.0
 ## ARG's for build time with default values
 # TODO remove this comment. Set APROXY_PORT with an error. It's the fastest way to see if it's work
 ARG APROXY_PROTOCOL=http
-ARG APROXY_SERVER=localhost
+ARG APROXY_SERVER
 ARG APROXY_PORT=80
 
 # ENV's are for image, probably we need ot later
@@ -27,6 +27,11 @@ EXPOSE 5900
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
 
+RUN echo Proxy setting: $APROXY_PROTOCOL $APROXY_SERVER $APROXY_PORT
+RUN echo "Acquire::http::Proxy \"http_proxy=$APROXY_PROTOCOL://$APROXY_SERVER:$APROXY_PORT\";" > /etc/apt/apt.conf.d/30proxy
+
+RUN cat /etc/apt/apt.conf.d/30proxy
+
 # Install Java.
 RUN \
   apt-get update && \
@@ -45,7 +50,6 @@ ENV ANDROID_HOME /opt/android
 RUN wget -O android-tools.zip https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip --show-progress \
 && unzip android-tools.zip -d $ANDROID_HOME && rm android-tools.zip
 ENV PATH $PATH:$ANDROID_HOME/tools/bin
-
 
 #Install Android Tools
 RUN yes | sdkmanager --update --verbose --proxy_host=$APROXY_SERVER --proxy_port=$APROXY_PORT --proxy_protocol=$APROXY_PROTOCOL
