@@ -5,7 +5,6 @@
 FROM phusion/baseimage:0.10.0
 
 ## ARG's for build time with default values
-# TODO remove this comment. Set APROXY_PORT with an error. It's the fastest way to see if it's work
 ARG APROXY_PROTOCOL=http
 ARG APROXY_SERVER
 ARG APROXY_PORT=80
@@ -65,10 +64,10 @@ RUN yes | sdkmanager "extras;google;m2repository" --verbose --proxy_host=$APROXY
 ENV PATH $PATH:$ANDROID_HOME/platform-tools
 ENV PATH $PATH:$ANDROID_HOME/emulator
 
-#Install latest android emulator   system images
+#Install latest android emulator system images
 ENV EMULATOR_IMAGE "system-images;android-25;google_apis;armeabi-v7a"
 ENV ARCH "armeabi-v7a"
-RUN yes | sdkmanager $EMULATOR_IMAGE --verbose
+RUN yes | sdkmanager $EMULATOR_IMAGE --verbose --proxy_host=$APROXY_SERVER --proxy_port=$APROXY_PORT --proxy=$APROXY_PROTOCOL
 
 # Add startup script
 COPY startup.sh /startup.sh

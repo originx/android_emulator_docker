@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-buildDockerCmd="docker-compose build --no-cache "
+buildDockerCmd="docker-compose build"
 buildDockerParam=""
 proxy=$(env |grep https_proxy)
 
