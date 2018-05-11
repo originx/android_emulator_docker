@@ -38,9 +38,10 @@ ENV PATH $PATH:$ANDROID_HOME/tools/bin
 RUN yes | sdkmanager --update --verbose
 RUN yes | sdkmanager "platform-tools" --verbose
 RUN yes | sdkmanager "platforms;android-27" --verbose
-RUN yes | sdkmanager "build-tools;27.0.3" --verbose
+RUN yes | sdkmanager "build-tools;27.1.1" --verbose
 RUN yes | sdkmanager "system-images;android-27;google_apis;x86" --verbose
 RUN yes | sdkmanager "system-images;android-25;google_apis;armeabi-v7a" --verbose
+RUN yes | sdkmanager "system-images;android-24;google_apis;armeabi-v7a" --verbose
 RUN yes | sdkmanager "extras;android;m2repository" --verbose
 RUN yes | sdkmanager "extras;google;m2repository" --verbose
 
@@ -54,6 +55,6 @@ ENV ARCH "armeabi-v7a"
 RUN yes | sdkmanager $EMULATOR_IMAGE --verbose
 
 # Add startup script
-ADD startup.sh /startup.sh
+COPY startup.sh /startup.sh
 RUN chmod +x /startup.sh
 ENTRYPOINT ["/startup.sh"]
