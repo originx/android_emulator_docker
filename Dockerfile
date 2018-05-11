@@ -23,13 +23,11 @@ EXPOSE 5554
 EXPOSE 5555
 EXPOSE 5900
 
+ENV http_proxy http://$APROXY_SERVER:$APROXY_PORT
+ENV https_proxy http://$APROXY_SERVER:$APROXY_PORT
+
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
-
-RUN echo Proxy setting: $APROXY_PROTOCOL $APROXY_SERVER $APROXY_PORT
-RUN echo "Acquire::http::Proxy \"http_proxy=$APROXY_PROTOCOL://$APROXY_SERVER:$APROXY_PORT\";" > /etc/apt/apt.conf.d/30proxy
-
-RUN cat /etc/apt/apt.conf.d/30proxy
 
 # Install Java.
 RUN \

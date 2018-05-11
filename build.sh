@@ -18,7 +18,6 @@ else
      host=$(hostname)
    fi
 
-   echo $proxy " --> " $protocol $host $port
    buildDockerParam="--build-arg APROXY_PROTOCOL=$protocol --build-arg APROXY_SERVER=$host --build-arg APROXY_PORT=$port"
 fi
 
