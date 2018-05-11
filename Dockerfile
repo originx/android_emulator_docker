@@ -27,6 +27,8 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 # Install another dependencies
 RUN apt-get install git wget unzip net-tools socat gcc-multilib libglu1 -y
 
+#create empty repo file to supress unneeded warning from sdkmanager on first file creation
+RUN mkdir ~/.android && touch ~/.android/repositories.cfg
 #Install Android
 ENV ANDROID_HOME /opt/android
 RUN wget -O android-tools.zip https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip --show-progress \
