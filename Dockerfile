@@ -6,7 +6,7 @@ FROM phusion/baseimage:0.10.0
 
 MAINTAINER morsolic <marioorsolic@gmail.com>
 
-LABEL Version="0.0.1"
+LABEL Version="0.1.0"
 
 # Expose ADB
 EXPOSE 5554
