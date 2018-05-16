@@ -23,8 +23,8 @@ EXPOSE 5554
 EXPOSE 5555
 EXPOSE 5900
 
-ENV http_proxy http://$APROXY_SERVER:$APROXY_PORT
-ENV https_proxy http://$APROXY_SERVER:$APROXY_PORT
+#ENV http_proxy http://$APROXY_SERVER:$APROXY_PORT
+#ENV https_proxy http://$APROXY_SERVER:$APROXY_PORT
 
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
@@ -49,14 +49,14 @@ RUN wget -O android-tools.zip https://dl.google.com/android/repository/sdk-tools
 ENV PATH $PATH:$ANDROID_HOME/tools/bin
 
 #Install Android Tools
-RUN yes | sdkmanager --update --verbose --proxy_host=$APROXY_SERVER --proxy_port=$APROXY_PORT --proxy_protocol=$APROXY_PROTOCOL
-RUN yes | sdkmanager "platform-tools" --verbose --proxy_host=$APROXY_SERVER --proxy_port=$APROXY_PORT --proxy_protocol=$APROXY_PROTOCOL
-RUN yes | sdkmanager "platforms;android-27" --verbose --proxy_host=$APROXY_SERVER --proxy_port=$APROXY_PORT --proxy_protocol=$APROXY_PROTOCOL
-RUN yes | sdkmanager "build-tools;27.1.1" --verbose --proxy_host=$APROXY_SERVER --proxy_port=$APROXY_PORT --proxy_protocol=$APROXY_PROTOCOL
-RUN yes | sdkmanager "system-images;android-27;google_apis;x86" --verbose --proxy_host=$APROXY_SERVER --proxy_port=$APROXY_PORT --proxy_protocol=$APROXY_PROTOCOL
-RUN yes | sdkmanager "system-images;android-25;google_apis;armeabi-v7a" --verbose --proxy_host=$APROXY_SERVER --proxy_port=$APROXY_PORT --proxy_protocol=$APROXY_PROTOCOL
-RUN yes | sdkmanager "extras;android;m2repository" --verbose --proxy_host=$APROXY_SERVER --proxy_port=$APROXY_PORT --proxy_protocol=$APROXY_PROTOCOL
-RUN yes | sdkmanager "extras;google;m2repository" --verbose --proxy_host=$APROXY_SERVER --proxy_port=$APROXY_PORT --proxy_protocol=$APROXY_PROTOCOL
+RUN yes | sdkmanager --update --verbose --proxy_host=$APROXY_SERVER --proxy_port=$APROXY_PORT --proxy=$APROXY_PROTOCOL
+RUN yes | sdkmanager "platform-tools" --verbose --proxy_host=$APROXY_SERVER --proxy_port=$APROXY_PORT --proxy=$APROXY_PROTOCOL
+RUN yes | sdkmanager "platforms;android-27" --verbose --proxy_host=$APROXY_SERVER --proxy_port=$APROXY_PORT --proxy=$APROXY_PROTOCOL
+RUN yes | sdkmanager "build-tools;27.1.1" --verbose --proxy_host=$APROXY_SERVER --proxy_port=$APROXY_PORT --proxy=$APROXY_PROTOCOL
+RUN yes | sdkmanager "system-images;android-27;google_apis;x86" --verbose --proxy_host=$APROXY_SERVER --proxy_port=$APROXY_PORT --proxy=$APROXY_PROTOCOL
+RUN yes | sdkmanager "system-images;android-25;google_apis;armeabi-v7a" --verbose --proxy_host=$APROXY_SERVER --proxy_port=$APROXY_PORT --proxy=$APROXY_PROTOCOL
+RUN yes | sdkmanager "extras;android;m2repository" --verbose --proxy_host=$APROXY_SERVER --proxy_port=$APROXY_PORT --proxy=$APROXY_PROTOCOL
+RUN yes | sdkmanager "extras;google;m2repository" --verbose --proxy_host=$APROXY_SERVER --proxy_port=$APROXY_PORT --proxy=$APROXY_PROTOCOL
 
 # Add platform-tools and emulator to path
 ENV PATH $PATH:$ANDROID_HOME/platform-tools

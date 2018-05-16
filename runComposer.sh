@@ -1,7 +1,14 @@
 #!/usr/bin/env sh
 
-buildDockerCmd="docker-compose build"
-buildDockerParam=""
+BASEDIR=$(dirname "$0")
+
+home=$1 # e.g /home/ci/
+emulator=$2 # eg. scripts/emulator.sh or ""
+gradleTasks=$3
+releaseProfiles=$4
+
+eval "buildDockerCmd='docker-compose -f $BASEDIR/docker-compose.yml build '"
+eval "runDockerCmd='docker-compose -f $BASEDIR/docker-compose.yml run -v /dev/kvm:/dev/kvm -v `pwd`:$home android_emulator --privileged bash -c \"$emulator ./gradlew clean $gradleTasks $releaseProfiles --profile --stacktrace\"'"
 proxy=$(env |grep https_proxy)
 
 if [ -z "$proxy" ]; then
@@ -22,6 +29,10 @@ else
 fi
 
 buildDockerCmd=$(echo $buildDockerCmd $buildDockerParam)
+echo $buildDockerCmd
 eval $buildDockerCmd
+
+echo $runDockerCmd
+eval $runDockerCmd
 
 
