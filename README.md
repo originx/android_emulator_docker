@@ -1,4 +1,10 @@
-# Android-emulator
+# Deprecated 
+
+This dockerimage was a test to see how emulators behave and can be setup for CI purposes across various host systems.
+Currently there is no support for nested HAXM virt, so x86 emulators can only be run if your host system is Ubuntu/kvm or if you choose a different backbone for your docker, e.g. virtualbox.
+If you have interest in improving this so there is one single docker image usable between systems with nested virt feel free to make a PR.
+
+## Android-emulator
 
 ### Version
 0.1.0
